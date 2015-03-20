@@ -248,13 +248,13 @@ public class AppRater {
             builder = new AlertDialog.Builder(context);
         }
         ApplicationRatingInfo ratingInfo = ApplicationRatingInfo.createApplicationInfo(context);
-        builder.setTitle(String.format(context.getString(R.string.dialog_title), ratingInfo.getApplicationName()));
+        builder.setTitle(String.format(context.getString(R.string.app_rater_dialog_title), ratingInfo.getApplicationName()));
 
-        builder.setMessage(context.getString(R.string.rate_message));
+        builder.setMessage(context.getString(R.string.app_rater_rate_message));
 
         builder.setCancelable(isCancelable);
 
-        builder.setPositiveButton(context.getString(R.string.rate),
+        builder.setPositiveButton(context.getString(R.string.app_rater_rate_button),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         rateNow(context);
@@ -266,7 +266,7 @@ public class AppRater {
                     }
                 });
 
-        builder.setNeutralButton(context.getString(R.string.later),
+        builder.setNeutralButton(context.getString(R.string.app_rater_later_button),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         if (editor != null) {
