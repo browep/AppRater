@@ -13,7 +13,12 @@ import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.Date;
+
 public class AppRater {
+
+    public static final String TAG = AppRater.class.getCanonicalName();
+
     // Preference Constants
     private final static String PREF_NAME = "apprater";
     private final static String PREF_LAUNCH_COUNT = "launch_count";
@@ -171,8 +176,19 @@ public class AppRater {
         }
         // Wait for at least the number of launches or the number of days used
         // until prompt
-        if (launch_count >= launches || (System.currentTimeMillis() >= date_firstLaunch + (days * 24 * 60 * 60 * 1000))) {
+        long timeToLaunch = date_firstLaunch + (days * 24 * 60 * 60 * 1000);
+        long currentTime = System.currentTimeMillis();
+        Log.d(TAG, "timeToLaunch=" + new Date(timeToLaunch) + " currentTime=" + new Date(currentTime)
+                + " required launches=" + launches
+                + " current launches=" + launch_count
+        );
+
+        if (launch_count >= launches
+                && (currentTime >= timeToLaunch)) {
+            Log.d(TAG, "showing rate alert dialog");
             showRateAlertDialog(context, editor);
+        } else {
+            Log.d(TAG, "not showing rate alert dialog");
         }
         commitOrApply(editor);
     }
